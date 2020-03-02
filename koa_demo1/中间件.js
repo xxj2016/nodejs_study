@@ -9,6 +9,12 @@ app.use(async (ctx, next) => {
     await next();
     const ms = new Date() - start;
     ctx.set("X-Response-Time", `${ms}ms`);
+    if (ctx.status === 404) {
+        ctx.status = 404;
+        ctx.body = "这是一个404页面";
+    } else {
+        console.log(ctx.url);
+    }
 });
 
 router.get("/", async (ctx, next) => {
