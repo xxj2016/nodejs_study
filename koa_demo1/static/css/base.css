@@ -1,0 +1,12 @@
+h2 {
+    background-color: aquamarine;
+}
+
+.test-img {
+    width: 60px;    
+    height: auto;
+}
+
+.test-img img {
+    width: 100%;
+}
