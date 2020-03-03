@@ -25,7 +25,18 @@ app.use(
 
 
 router.get('/', async (ctx) => {
-    await ctx.render('index');
+
+    let title = '你好，ejs';
+    let news = [
+        {title: 'DFsdfh dfsdf sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
+        {title: 'DFs sdsd dfh dfsdf sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
+        {title: 'DFsdfh sdsd sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
+        {title: 'DFsdfh as sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
+    ]
+    await ctx.render('index', {
+        title,
+        news
+    });
 })
 
 app.use(router.routes()); // 启动路由
