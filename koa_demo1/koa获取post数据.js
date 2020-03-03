@@ -1,3 +1,17 @@
+/*
+    Koa 使用koa-bodyparser获取表单提交的数据
+
+    1. npm install --save koa-bodyparser
+
+    2. 引入 bodyParser = require('koa-bodyparser');
+
+    3. app.use(bodyParser());
+    
+    4. var data = ctx.request.body;
+    
+*/
+
+
 var Koa = require("koa"),
     router = require("koa-router")(),
     views = require("koa-views"),
