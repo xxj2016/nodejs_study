@@ -8,6 +8,16 @@
     4. app.use(views(__dirname, { extension: 'ejs'}));
 
     5. await ctx.render('index');
+
+
+    注意：我们需要在每一个路由的render里面都要渲染一个公共的数据
+
+    公共的数据放在这个里面，这样的话在任何的模板都可以使用
+
+    ctx.state = { // 放在中间件
+        session: this.session,
+        title: 'Jet'
+    }
  */
 var Koa = require("koa"),
     router = require("koa-router")(),
@@ -24,18 +34,36 @@ app.use(
 );
 
 
+// 写一个中间件配置公共的数据
+app.use(async (ctx, next) => {
+    ctx.state = {
+        username: 'JetXu',
+        password: '111111'
+    }
+
+    await next(); // 继续向下匹配路由
+})
+
 router.get('/', async (ctx) => {
 
     let title = '你好，ejs';
+    await ctx.render('index', {
+        title
+    });
+})
+router.get('/new', async (ctx) => {
+
     let news = [
         {title: 'DFsdfh dfsdf sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
         {title: 'DFs sdsd dfh dfsdf sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
         {title: 'DFsdfh sdsd sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
         {title: 'DFsdfh as sdfdsf', content: 'sdad asda sd asd asd asd asd asda sdas d asd '},
     ]
-    await ctx.render('index', {
-        title,
-        news
+
+    let content = '<h2>绑定html数据<h2>';
+    await ctx.render('news', {
+        news,
+        content
     });
 })
 

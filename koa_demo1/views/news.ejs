@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <%- include ('public/header.ejs') -%> <%for(var i = 0; i < news.length;
+        i++){%>
+        <section style="background-color: aquamarine;">
+            <h2 style="color: red;"><%=news[i].title%></h2>
+            <div><%=news[i].content%></div>
+        </section>
+        <%}%> <%=content%>
+        <br />
+        <%-content%>
+        <br />
+        <%if(content){%>
+        <h2>content有值</h2>
+        <%} else {%>
+        <h2>content没有值</h2>
+        <%}%>
+        <p>用户名：<%=username%></p>
+        <p>密码：<%=password%></p>
+    </body>
+</html>
