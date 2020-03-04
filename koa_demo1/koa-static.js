@@ -23,6 +23,7 @@ var app = new Koa();
 // 配置post bodyParser的中间件
 app.use(bodyParser());
 
+// 配置静态web服务中间件
 app.use(static('./static'));
 
 app.use(views('views', {

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            ul,
+            li {
+                list-style-type: none;
+            }
+        </style>
+    </head>
+    <body>
+        {{data.title}}
+        <br />
+        <ul>
+            {{each data.list}}
+            <li>
+                新闻标题{{$index}}: 
+                <br>
+                新闻内容{{$value.title}}: {{$value.content}}
+            </li>
+            <br>
+            {{/each}}
+        </ul>
+    </body>
+</html>
