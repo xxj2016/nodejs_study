@@ -57,7 +57,7 @@ w.run(); */
 
 
 // es6静态方法
-class Person {
+/* class Person {
     constructor(name) {
         this._name = name;
     }
@@ -78,4 +78,36 @@ var p = new Person('Jet');
 p.run();
 Person.work(); // es6里面的静态方法
 
-console.log(Person.instance);
+console.log(Person.instance); */
+
+// es6单例模式
+
+class Db {
+
+    static getInstance() {
+        if (!Db.instance) {
+            Db.instance = new Db();
+        }
+        return Db.instance;
+    }
+
+    constructor() {
+        console.log('实例化会触发构造函数');
+
+        this.connect();
+    }
+
+    connect() {
+        console.log('连接数据库');
+    }
+
+    find() {
+        console.log('查询数据库');
+    }
+}
+
+var db1 = Db.getInstance();
+var db2 = Db.getInstance();
+var db3 = Db.getInstance();
+
+db3.find();
