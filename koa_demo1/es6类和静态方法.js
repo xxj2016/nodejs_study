@@ -24,7 +24,7 @@ p.getName(); */
 
 
 // es6继承
-class Person {
+/* class Person {
     constructor(name, age) {
         this.name = name;
         this.age = age;
@@ -53,4 +53,29 @@ class Web extends Person {
 var w = new Web("Jet", 30, "男");
 w.print();
 w.getInfo();
-w.run();
+w.run(); */
+
+
+// es6静态方法
+class Person {
+    constructor(name) {
+        this._name = name;
+    }
+
+    run() {
+        console.log(this._name);
+    }
+
+    static work() {
+        console.log('这事es6里面的静态方法');
+    }
+}
+
+Person.instance = '这事一个实例';
+
+var p = new Person('Jet');
+
+p.run();
+Person.work(); // es6里面的静态方法
+
+console.log(Person.instance);
