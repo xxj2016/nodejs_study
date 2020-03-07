@@ -81,7 +81,6 @@ Person.work(); // es6里面的静态方法
 console.log(Person.instance); */
 
 // es6单例模式
-
 class Db {
 
     static getInstance() {
