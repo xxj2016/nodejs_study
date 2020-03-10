@@ -14,7 +14,7 @@ class DB {
 
     constructor() {
         this.dbClient = ""; // 属性 放db对象
-        // this.connect();
+        this.connect(); // 实例化的时候就连接数据库
     }
 
     connect() {
