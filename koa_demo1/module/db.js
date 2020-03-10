@@ -3,6 +3,15 @@ const MongoClient = require("mongodb").MongoClient;
 const CONFIG = require("./config");
 
 class DB {
+    static getInstance() {
+        // 单例模式，解决多次实例化问题
+        if (!DB.instance) {
+            DB.instance = new DB();
+        }
+
+        return DB.instance;
+    }
+
     constructor() {
         this.dbClient = ""; // 属性 放db对象
         // this.connect();
@@ -10,9 +19,10 @@ class DB {
 
     connect() {
         var _that = this;
-        console.log("连接数据库");
         return new Promise((resolve, reject) => {
-            if (!_that.dbClient) { // 解决数据库多次连接的问题
+            if (!_that.dbClient) {
+                console.log("连接数据库");
+                // 解决数据库多次连接的问题
                 MongoClient.connect(CONFIG.dbUrl, (err, client) => {
                     if (err) {
                         reject(err);
@@ -46,13 +56,14 @@ class DB {
     update() {}
 }
 
-var db = new DB();
+// var db = new DB();
+var db = DB.getInstance();
 
 setTimeout(() => {
     console.time("START");
     db.find("user", {}).then(data => {
         console.timeEnd("START");
-        console.log(data);
+        // console.log(data);
     });
 }, 500);
 
@@ -60,6 +71,25 @@ setTimeout(() => {
     console.time("START1");
     db.find("user", {}).then(data => {
         console.timeEnd("START1");
-        console.log(data);
+        // console.log(data);
     });
 }, 3000);
+
+// var db1 = new DB();
+var db1 = DB.getInstance();
+
+setTimeout(() => {
+    console.time("START2");
+    db1.find("user", {}).then(data => {
+        console.timeEnd("START2");
+        // console.log(data);
+    });
+}, 5000);
+
+setTimeout(() => {
+    console.time("START3");
+    db1.find("user", {}).then(data => {
+        console.timeEnd("START3");
+        // console.log(data);
+    });
+}, 7000);
