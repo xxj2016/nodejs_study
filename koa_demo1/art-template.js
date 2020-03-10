@@ -23,6 +23,7 @@ app.use(async function (ctx) {
 var Koa = require("koa"),
     router = require("koa-router")(),
     path = require('path');
+    DB = require('./module/db')
 
 const render = require("koa-art-template");
 var app = new Koa();
@@ -36,10 +37,19 @@ render(app, {
 
 router.get("/", async ctx => {
     ctx.body = "首页";
+    console.time('start');
+    var data =await(DB.find('user', {}));
+    console.timeEnd('start');
+    console.log(data);
 });
 
 router.get("/news", async ctx => {
     ctx.body = "新闻页面";
+
+    console.time('start1');
+    var d =await(DB.find('user', {}));
+    console.timeEnd('start1');
+    console.log(d);
 
     let data = {
         list: [

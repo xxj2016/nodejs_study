@@ -4,7 +4,7 @@ const CONFIG = require("./config");
 
 class DB {
     static getInstance() {
-        // 单例模式，解决多次实例化问题
+        // 单例模式，解决多次实例化问题 实例不共享的问题
         if (!DB.instance) {
             DB.instance = new DB();
         }
@@ -55,7 +55,7 @@ class DB {
 
     update() {}
 }
-
+/* 
 // var db = new DB();
 var db = DB.getInstance();
 
@@ -93,3 +93,7 @@ setTimeout(() => {
         // console.log(data);
     });
 }, 7000);
+ */
+
+
+ module.exports = DB.getInstance();
