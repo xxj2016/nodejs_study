@@ -4,20 +4,26 @@ const CONFIG = require("./config");
 
 class DB {
     constructor() {
+        this.dbClient = ""; // 属性 放db对象
         // this.connect();
     }
 
     connect() {
+        var _that = this;
         console.log("连接数据库");
         return new Promise((resolve, reject) => {
-            MongoClient.connect(CONFIG.dbUrl, (err, client) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    var db = client.db(CONFIG.dbName);
-                    resolve(db);
-                }
-            });
+            if (!_that.dbClient) { // 解决数据库多次连接的问题
+                MongoClient.connect(CONFIG.dbUrl, (err, client) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        _that.dbClient = client.db(CONFIG.dbName);
+                        resolve(_that.dbClient);
+                    }
+                });
+            } else {
+                resolve(_that.dbClient);
+            }
         });
     }
 
@@ -41,8 +47,19 @@ class DB {
 }
 
 var db = new DB();
-console.time("START");
-db.find("user", {}).then(data => {
-    console.timeEnd("START");
-    console.log(data);
-});
+
+setTimeout(() => {
+    console.time("START");
+    db.find("user", {}).then(data => {
+        console.timeEnd("START");
+        console.log(data);
+    });
+}, 500);
+
+setTimeout(() => {
+    console.time("START1");
+    db.find("user", {}).then(data => {
+        console.timeEnd("START1");
+        console.log(data);
+    });
+}, 3000);
