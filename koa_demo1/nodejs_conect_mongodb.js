@@ -26,7 +26,7 @@
     })
 */
 
-const MongoClient = require('mongodb').MongoClient;
+/* const MongoClient = require('mongodb').MongoClient;
 
 const dbUrl = "mongodb://localhost:27017";
 
@@ -42,7 +42,7 @@ MongoClient.connect(dbUrl, (err, client) => {
     var db = client.db(dbName);
 
     // 增加数据
-    db.collection('user').insertOne({'username':'Xu','age': 32,'sex': '男','status': "1"}, function(err, result) {
+    db.collection('user').insertOne({'username':'Jet','age': 22,'sex': '女','status': "1"}, function(err, result) {
         if (!err) {
             console.log('增加数据成功');
 
@@ -50,5 +50,49 @@ MongoClient.connect(dbUrl, (err, client) => {
 
             console.timeEnd('start');
         }
+    })
+}) */
+
+
+// 查询数据
+const MongoClient = require('mongodb').MongoClient;
+
+const dbUrl = "mongodb://localhost:27017";
+
+const dbName = 'koa';
+
+// 连接数据库
+console.time('start1');
+MongoClient.connect(dbUrl, (err, client) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    var db = client.db(dbName);
+
+    // 查询数据
+    var result = db.collection('user').find({});
+
+    result.toArray( (err, docs) => {
+        console.timeEnd('start1');
+        console.log(docs);
+    })
+})
+
+// 连接数据库
+console.time('start3');
+MongoClient.connect(dbUrl, (err, client) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    var db = client.db(dbName);
+
+    // 查询数据
+    var result = db.collection('user').find({});
+
+    result.toArray( (err, docs) => {
+        console.timeEnd('start3');
+        console.log(docs);
     })
 })
