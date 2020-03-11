@@ -53,7 +53,52 @@ class DB {
         });
     }
 
-    update() {}
+    insert(collectionName, json) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).insertOne(json, (err, results)=> {
+                    if (err) {
+                        reject(err);
+                        return;
+                    } else {
+                        resolve(results);
+                    }
+                })
+            })
+        })
+
+    }
+
+    update(collectionName, json1, json2) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).updateOne(json1, {$set: json2}, (err, results) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    } else {
+                        resolve(results);
+                    }
+                })
+            })
+        })
+    }
+
+    delete(collectionName, json1) {
+        return new Promise((resolve, reject) => {
+            this.connect().then((db) => {
+                db.collection(collectionName).deleteOne(json1, (err) => {
+                    if(err) {
+                        reject(err);
+                        console.log(`Error: ` + err)
+                       return;
+                   } else {
+                       resolve('已删除');
+                   }
+                });
+            })
+        })
+    }
 }
 /* 
 // var db = new DB();

@@ -40,7 +40,34 @@ router.get("/", async ctx => {
     console.time('start');
     var data =await(DB.find('user', {}));
     console.timeEnd('start');
-    console.log(data);
+    // console.log(data);
+});
+
+router.get('/add', async (ctx) => {
+    ctx.body = "添加数据";
+
+    console.time('start2');
+    var data =await(DB.insert('user', {'username':'888','age': 22,'sex': '女','status': "0"}));
+    console.timeEnd('start2');
+    // console.log(data);
+});
+
+router.get('/edit', async (ctx) => {
+    ctx.body = "修改数据";
+
+    console.time('start3');
+    var data =await(DB.update('user', {'username':'888'}, {'username': '000kkk'}));
+    console.timeEnd('start3');
+    // console.log(data);
+});
+
+router.get('/del', async (ctx) => {
+    ctx.body = "删除数据";
+
+    console.time('start4');
+    var data =await(DB.delete('user', {'status':'1'} ));
+    console.timeEnd('start4');
+    // console.log(data);
 });
 
 router.get("/news", async ctx => {
