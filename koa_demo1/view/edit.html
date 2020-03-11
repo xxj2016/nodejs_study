@@ -1,0 +1,12 @@
+<h2>编辑用户</h2>
+
+<form action="/editUser" method="post">
+    <input type="hidden" name="id" placeholder="username" value="{{@data._id}}">
+    <label for="">username:　</label><input type="text" name="username" placeholder="username" value="{{data.username}}">
+    <br>
+    <label for="">age:　</label><input type="text" name="age" placeholder="age" value="{{data.age}}">
+    <br>
+    <label for="">sex:　</label><input type="text" name="sex" placeholder="sex" value="{{data.sex}}">
+    <br>
+    <button type="submit">提交</button>
+</form>

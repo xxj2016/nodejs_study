@@ -10,3 +10,44 @@ h2 {
 .test-img img {
     width: 100%;
 }
+
+.container {
+    margin: 100px auto;
+    width: 80%;
+
+}
+
+.add {
+    width: auto;
+    margin: 0 auto;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table tr {
+    border: 1px solid red;
+}
+
+td, th {
+    text-align: center;
+    border-right: 1px solid red;
+    padding: 10px 20px;
+}
+td a {
+    padding: 0 10px;
+    border-radius: 5px;
+    color: whitesmoke;
+    background-color: coral;
+    cursor: pointer;
+}

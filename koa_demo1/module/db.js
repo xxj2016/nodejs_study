@@ -1,4 +1,6 @@
-const MongoClient = require("mongodb").MongoClient;
+const Mongodb = require("mongodb");
+const MongoClient = Mongodb.MongoClient;
+const ObjectId = Mongodb.ObjectID;
 
 const CONFIG = require("./config");
 
@@ -98,6 +100,10 @@ class DB {
                 });
             })
         })
+    }
+
+    getObjectId(id) { // mongodb里面查询 _id把字符串转换称对象
+        return new ObjectId(id);
     }
 }
 /* 
