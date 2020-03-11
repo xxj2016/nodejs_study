@@ -91,6 +91,7 @@ router.post("/addUser", async ctx => {
 
     }
 });
+
 // 更新用户
 router.post("/editUser", async ctx => {
     // ctx.body = "添加数据";
@@ -115,24 +116,24 @@ router.post("/editUser", async ctx => {
     }
 });
 
-router.get("/edit", async ctx => {
-    ctx.body = "修改数据";
+router.get("/delete", async ctx => {
+    // ctx.body = "删除数据";
+    var id = ctx.query.id;
 
-    console.time("edit");
-    var data = await DB.update(
-        "user",
-        { username: "888" },
-        { username: "000kkk" }
-    );
-    console.timeEnd("edit");
-    // console.log(data);
-});
-
-router.get("/del", async ctx => {
-    ctx.body = "删除数据";
+    var data = await DB.delete('user', {'_id': DB.getObjectId(id)})
 
     console.time("start4");
-    var data = await DB.delete("user", { status: "1" });
+
+    try {
+        if (data.result.ok) {
+            await ctx.redirect('/')
+        }
+    } catch (error) {
+        console.log(error);
+        await ctx.redirect('/')
+        return;
+
+    }
     console.timeEnd("start4");
     // console.log(data);
 });
