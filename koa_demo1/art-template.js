@@ -25,10 +25,9 @@ var Koa = require("koa"),
     path = require("path"),
     DB = require("./module/db"),
     static = require("koa-static"),
-    bodyParser = require("koa-bodyparser");
+    bodyParser = require("koa-bodyparser"),
+    render = require("koa-art-template");
 
-
-const render = require("koa-art-template");
 var app = new Koa();
 app.use(static("./static"));
 app.use(bodyParser());
